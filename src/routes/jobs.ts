@@ -1,5 +1,6 @@
 import JobController from "../controllers/jobs";
 import express from "express";
+import { isAuthenticated } from "../middlewares";
 
 const controller = new JobController();
 

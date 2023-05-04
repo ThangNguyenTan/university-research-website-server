@@ -7,6 +7,7 @@ var nodeBase64 = require("nodejs-base64-converter");
 import "dotenv/config";
 
 import MediaController from "../controllers/media";
+import { isAuthenticated } from "../middlewares";
 
 const credentials = nodeBase64.decode(process.env.FIREBASE_BASE64_FILE);
 
