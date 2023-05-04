@@ -871,7 +871,7 @@
 				}
 			}
 		},
-		"/api/job/{id}": {
+		"/api/job/{jobName}": {
 			"patch": {
 				"operationId": "UpdateJob",
 				"responses": {
@@ -929,7 +929,7 @@
 				"parameters": [
 					{
 						"in": "path",
-						"name": "id",
+						"name": "jobName",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -1102,7 +1102,7 @@
 				}
 			}
 		},
-		"/api/publication/{id}": {
+		"/api/publication/{title}": {
 			"get": {
 				"operationId": "GetPublication",
 				"responses": {
@@ -1160,7 +1160,7 @@
 				"parameters": [
 					{
 						"in": "path",
-						"name": "id",
+						"name": "title",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -1225,7 +1225,7 @@
 				"parameters": [
 					{
 						"in": "path",
-						"name": "id",
+						"name": "title",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -1300,7 +1300,7 @@
 				"parameters": [
 					{
 						"in": "path",
-						"name": "id",
+						"name": "title",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -1454,7 +1454,7 @@
 				}
 			}
 		},
-		"/api/people/{id}": {
+		"/api/people/{name}": {
 			"get": {
 				"operationId": "GetPerson",
 				"responses": {
@@ -1512,7 +1512,7 @@
 				"parameters": [
 					{
 						"in": "path",
-						"name": "id",
+						"name": "name",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -1577,7 +1577,7 @@
 				"parameters": [
 					{
 						"in": "path",
-						"name": "id",
+						"name": "name",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -1652,7 +1652,7 @@
 				"parameters": [
 					{
 						"in": "path",
-						"name": "id",
+						"name": "name",
 						"required": true,
 						"schema": {
 							"type": "string"
