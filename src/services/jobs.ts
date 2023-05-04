@@ -78,7 +78,7 @@ export default class JobService {
   }
 
   @SuccessResponse(200, "Successfully Updated")
-  @Patch("/{id}")
+  @Patch("/{jobName}")
   public async updateJob(
     @Path() jobName: string,
     @Body() bodyData: UpdateJobRequestBody
