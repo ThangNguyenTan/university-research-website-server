@@ -1,0 +1,19 @@
+services:
+  server:
+    container_name: server-dev
+    image: server-dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: development
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - AUTH_USERNAME=${AUTH_USERNAME}
+      - AUTH_PASSWORD=${AUTH_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+      - FIREBASE_PRIVATE_KEY=${FIREBASE_PRIVATE_KEY}
+      - FIREBASE_BASE64_FILE=${FIREBASE_BASE64_FILE}
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 8000:8000
