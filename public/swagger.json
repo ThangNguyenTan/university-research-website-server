@@ -1,0 +1,1760 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"DefaultReponseBody": {
+				"properties": {
+					"status": {
+						"type": "number",
+						"format": "double"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AuthResponseBody": {
+				"properties": {
+					"status": {
+						"type": "number",
+						"format": "double"
+					},
+					"message": {
+						"type": "string"
+					},
+					"token": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AuthRequestBody": {
+				"properties": {
+					"password": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"password",
+					"username"
+				],
+				"type": "object"
+			},
+			"RoleModel.Role": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchRolesResponseBody": {
+				"properties": {
+					"roles": {
+						"items": {
+							"$ref": "#/components/schemas/RoleModel.Role"
+						},
+						"type": "array"
+					},
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"message",
+					"status"
+				],
+				"type": "object"
+			},
+			"CreateRoleResponseBody": {
+				"properties": {
+					"role": {
+						"$ref": "#/components/schemas/RoleModel.Role"
+					},
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"message",
+					"status"
+				],
+				"type": "object"
+			},
+			"CreateRoleRequestBody": {
+				"properties": {
+					"description": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"description",
+					"name"
+				],
+				"type": "object"
+			},
+			"JobModel.Job": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"recruit": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"name",
+					"recruit"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchJobsResponseBody": {
+				"properties": {
+					"jobs": {
+						"items": {
+							"$ref": "#/components/schemas/JobModel.Job"
+						},
+						"type": "array"
+					},
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"message",
+					"status"
+				],
+				"type": "object"
+			},
+			"MutateJobResponseBody": {
+				"properties": {
+					"job": {
+						"$ref": "#/components/schemas/JobModel.Job"
+					},
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"message",
+					"status"
+				],
+				"type": "object"
+			},
+			"CreateJobRequestBody": {
+				"properties": {
+					"description": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"description",
+					"name"
+				],
+				"type": "object"
+			},
+			"UpdateJobRequestBody": {
+				"properties": {
+					"recruit": {
+						"type": "boolean"
+					},
+					"description": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"recruit",
+					"description",
+					"name"
+				],
+				"type": "object"
+			},
+			"PublicationModel.Publication": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"publish": {
+						"type": "number",
+						"format": "double"
+					},
+					"coverImagePath": {
+						"type": "string"
+					},
+					"contentImagePath": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"content": {
+						"type": "string"
+					},
+					"hyperlink": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					},
+					"createdDate": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"title",
+					"publish",
+					"coverImagePath",
+					"contentImagePath",
+					"description",
+					"content",
+					"hyperlink",
+					"type",
+					"createdDate"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchPublicationsResponseBody": {
+				"properties": {
+					"publications": {
+						"items": {
+							"$ref": "#/components/schemas/PublicationModel.Publication"
+						},
+						"type": "array"
+					},
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"message",
+					"status"
+				],
+				"type": "object"
+			},
+			"FetchPublicationResponseBody": {
+				"properties": {
+					"publication": {
+						"$ref": "#/components/schemas/PublicationModel.Publication"
+					},
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"message",
+					"status"
+				],
+				"type": "object"
+			},
+			"CreatePublicationResponseBody": {
+				"properties": {
+					"publication": {
+						"$ref": "#/components/schemas/PublicationModel.Publication"
+					},
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"message",
+					"status"
+				],
+				"type": "object"
+			},
+			"CreatePublicationRequestBody": {
+				"properties": {
+					"type": {
+						"type": "string"
+					},
+					"hyperlink": {
+						"type": "string"
+					},
+					"content": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"contentImagePath": {
+						"type": "string"
+					},
+					"coverImagePath": {
+						"type": "string"
+					},
+					"publish": {
+						"type": "number",
+						"format": "double"
+					},
+					"title": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"type",
+					"hyperlink",
+					"content",
+					"description",
+					"contentImagePath",
+					"coverImagePath",
+					"publish",
+					"title"
+				],
+				"type": "object"
+			},
+			"UpdatePublicationRequestBody": {
+				"properties": {
+					"type": {
+						"type": "string"
+					},
+					"hyperlink": {
+						"type": "string"
+					},
+					"content": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"contentImagePath": {
+						"type": "string"
+					},
+					"coverImagePath": {
+						"type": "string"
+					},
+					"publish": {
+						"type": "number",
+						"format": "double"
+					},
+					"title": {
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"PeopleModel.People": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"coverImagePath": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"createdDate": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"name",
+					"email",
+					"coverImagePath",
+					"description",
+					"createdDate"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchPeopleResponseBody": {
+				"properties": {
+					"people": {
+						"items": {
+							"$ref": "#/components/schemas/PeopleModel.People"
+						},
+						"type": "array"
+					},
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"message",
+					"status"
+				],
+				"type": "object"
+			},
+			"FetchPersonResponseBody": {
+				"properties": {
+					"person": {
+						"$ref": "#/components/schemas/PeopleModel.People"
+					},
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"message",
+					"status"
+				],
+				"type": "object"
+			},
+			"MutatePeopleResponseBody": {
+				"properties": {
+					"people": {
+						"$ref": "#/components/schemas/PeopleModel.People"
+					},
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"message",
+					"status"
+				],
+				"type": "object"
+			},
+			"CreatePeopleRequestBody": {
+				"properties": {
+					"job": {
+						"type": "string"
+					},
+					"role": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"coverImagePath": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"job",
+					"role",
+					"description",
+					"coverImagePath",
+					"email",
+					"name"
+				],
+				"type": "object"
+			},
+			"UpdatePeopleRequestBody": {
+				"properties": {
+					"job": {
+						"type": "string"
+					},
+					"role": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"coverImagePath": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"type": "object"
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "university-research-website-server",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/api/auth": {
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AuthResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Validation Failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid username or password",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AuthRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/role": {
+			"get": {
+				"operationId": "GetRoles",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FetchRolesResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Roles"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateRole",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateRoleResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Roles"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateRoleRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/job": {
+			"get": {
+				"operationId": "GetJobs",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FetchJobsResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Jobs"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateJob",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MutateJobResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Jobs"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateJobRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/job/{id}": {
+			"patch": {
+				"operationId": "UpdateJob",
+				"responses": {
+					"200": {
+						"description": "Successfully Updated",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MutateJobResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Jobs"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateJobRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/publication": {
+			"get": {
+				"operationId": "GetPublications",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FetchPublicationsResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Publications"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "type",
+						"required": false,
+						"schema": {
+							"default": "",
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "size",
+						"required": false,
+						"schema": {
+							"default": 20,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"default": 1,
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "CreatePublication",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreatePublicationResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Publications"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreatePublicationRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/publication/{id}": {
+			"get": {
+				"operationId": "GetPublication",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FetchPublicationResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Publications"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"patch": {
+				"operationId": "UpdatePublication",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreatePublicationResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Publications"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdatePublicationRequestBody"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeletePublication",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreatePublicationResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Publications"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/people": {
+			"get": {
+				"operationId": "GetPeople",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FetchPeopleResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Peoples"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "size",
+						"required": false,
+						"schema": {
+							"default": 20,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"default": 1,
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "CreatePeople",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MutatePeopleResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Peoples"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreatePeopleRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/people/{id}": {
+			"get": {
+				"operationId": "GetPerson",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FetchPersonResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Peoples"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"patch": {
+				"operationId": "UpdatePeople",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MutatePeopleResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Peoples"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdatePeopleRequestBody"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeletePeople",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MutatePeopleResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Peoples"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/media/upload": {
+			"post": {
+				"operationId": "UploadFile",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Media"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"file": {
+										"type": "string",
+										"format": "binary"
+									}
+								},
+								"required": [
+									"file"
+								]
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
