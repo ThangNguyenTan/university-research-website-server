@@ -60,7 +60,7 @@ let RoleService = class RoleService {
             }
         });
     }
-    createRole(bodyData) {
+    createRole(bodyData, _token = "") {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (!bodyData.name) {
@@ -85,8 +85,9 @@ __decorate([
 __decorate([
     (0, tsoa_1.Post)("/"),
     __param(0, (0, tsoa_1.Body)()),
+    __param(1, (0, tsoa_1.Header)("X-Access-Token")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], RoleService.prototype, "createRole", null);
 RoleService = __decorate([

@@ -5,6 +5,7 @@ import {
   SuccessResponse,
   Response,
   Tags,
+  Header,
 } from "tsoa";
 
 import { generateResponse, DefaultReponseBody } from "../helpers";
@@ -22,7 +23,10 @@ import { generateResponse, DefaultReponseBody } from "../helpers";
 })
 export default class RoleService {
   @Post("/upload")
-  public async uploadFile(@UploadedFile() file: Express.Multer.File) {
+  public async uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+    @Header("X-Access-Token") _token: string = ""
+  ) {
     try {
       return generateResponse(200, "Success", { file });
     } catch (error) {

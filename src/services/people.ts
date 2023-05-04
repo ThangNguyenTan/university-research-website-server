@@ -10,6 +10,7 @@ import {
   Delete,
   Patch,
   Query,
+  Header,
 } from "tsoa";
 import { generateResponse, DefaultReponseBody } from "../helpers";
 import * as PeopleModel from "../model/people";
@@ -104,7 +105,8 @@ export default class PeopleService {
 
   @Post("/")
   public async createPeople(
-    @Body() bodyData: CreatePeopleRequestBody
+    @Body() bodyData: CreatePeopleRequestBody,
+    @Header("X-Access-Token") _token: string = ""
   ): Promise<MutatePeopleResponseBody> {
     try {
       if (!bodyData.name) {
@@ -123,7 +125,8 @@ export default class PeopleService {
   @Patch("/{name}")
   public async updatePeople(
     @Path() name: string,
-    @Body() bodyData: UpdatePeopleRequestBody
+    @Body() bodyData: UpdatePeopleRequestBody,
+    @Header("X-Access-Token") _token: string = ""
   ): Promise<MutatePeopleResponseBody> {
     try {
       if (!bodyData.name) {
@@ -141,7 +144,8 @@ export default class PeopleService {
 
   @Delete("/{name}")
   public async deletePeople(
-    @Path() name: string
+    @Path() name: string,
+    @Header("X-Access-Token") _token: string = ""
   ): Promise<MutatePeopleResponseBody> {
     try {
       const people = await PeopleModel.deletePeopleByName(name);

@@ -43,10 +43,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const tsoa_1 = require("tsoa");
+const lodash_1 = __importDefault(require("lodash"));
 const helpers_1 = require("../helpers");
 const PublicationModel = __importStar(require("../model/publications"));
+const PeopleModel = __importStar(require("../model/people"));
 let PublicationService = class PublicationService {
     getPublications(type = "", size = 20, page = 1) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -76,7 +81,7 @@ let PublicationService = class PublicationService {
             }
         });
     }
-    createPublication(bodyData) {
+    createPublication(bodyData, _token = "") {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (!bodyData.title) {
@@ -91,7 +96,32 @@ let PublicationService = class PublicationService {
             }
         });
     }
-    updatePublication(title, bodyData) {
+    assignParticipantToPublication(title, personId, _token = "") {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let publication = yield PublicationModel.getPublicationByName(title);
+                yield PublicationModel.updatePublicationByTitle(title, {
+                    participants: [...lodash_1.default.get(publication, "participants", []), personId],
+                });
+                const person = yield PeopleModel.getPeopleById(personId);
+                yield PeopleModel.updatePeopleById(personId, {
+                    researchHighlights: [
+                        ...lodash_1.default.get(person, "researchHighlights", []),
+                        lodash_1.default.get(publication, "_id", null),
+                    ],
+                });
+                publication = yield PublicationModel.getPublicationByName(title);
+                return (0, helpers_1.generateResponse)(200, "Success", {
+                    publication,
+                });
+            }
+            catch (error) {
+                console.log(error);
+                return (0, helpers_1.generateResponse)();
+            }
+        });
+    }
+    updatePublication(title, bodyData, _token = "") {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (!bodyData.title) {
@@ -106,11 +136,37 @@ let PublicationService = class PublicationService {
             }
         });
     }
-    deletePublication(title) {
+    deletePublication(title, _token = "") {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const publication = yield PublicationModel.deletePublicationByTitle(title);
                 return (0, helpers_1.generateResponse)(200, "Success", { publication });
+            }
+            catch (error) {
+                console.log(error);
+                return (0, helpers_1.generateResponse)();
+            }
+        });
+    }
+    removeParticipantFromPublication(title, personId, _token = "") {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let publication = yield PublicationModel.getPublicationByName(title);
+                yield PublicationModel.updatePublicationByTitle(title, {
+                    participants: [
+                        ...lodash_1.default.get(publication, "participants", []).filter((participant) => String(participant._id) != personId),
+                    ],
+                });
+                const person = yield PeopleModel.getPeopleById(personId);
+                yield PeopleModel.updatePeopleById(personId, {
+                    researchHighlights: [
+                        ...lodash_1.default.get(person, "researchHighlights", []).filter((researchHighlight) => String(researchHighlight._id) != lodash_1.default.get(publication, "_id", "")),
+                    ],
+                });
+                publication = yield PublicationModel.getPublicationByName(title);
+                return (0, helpers_1.generateResponse)(200, "Success", {
+                    publication,
+                });
             }
             catch (error) {
                 console.log(error);
@@ -138,25 +194,46 @@ __decorate([
 __decorate([
     (0, tsoa_1.Post)("/"),
     __param(0, (0, tsoa_1.Body)()),
+    __param(1, (0, tsoa_1.Header)("X-Access-Token")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], PublicationService.prototype, "createPublication", null);
+__decorate([
+    (0, tsoa_1.Patch)("/{title}/participants/{personId}"),
+    __param(0, (0, tsoa_1.Path)()),
+    __param(1, (0, tsoa_1.Path)()),
+    __param(2, (0, tsoa_1.Header)("X-Access-Token")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String]),
+    __metadata("design:returntype", Promise)
+], PublicationService.prototype, "assignParticipantToPublication", null);
 __decorate([
     (0, tsoa_1.Patch)("/{title}"),
     __param(0, (0, tsoa_1.Path)()),
     __param(1, (0, tsoa_1.Body)()),
+    __param(2, (0, tsoa_1.Header)("X-Access-Token")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, Object, String]),
     __metadata("design:returntype", Promise)
 ], PublicationService.prototype, "updatePublication", null);
 __decorate([
     (0, tsoa_1.Delete)("/{title}"),
     __param(0, (0, tsoa_1.Path)()),
+    __param(1, (0, tsoa_1.Header)("X-Access-Token")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], PublicationService.prototype, "deletePublication", null);
+__decorate([
+    (0, tsoa_1.Delete)("/{title}/participants/{personId}"),
+    __param(0, (0, tsoa_1.Path)()),
+    __param(1, (0, tsoa_1.Path)()),
+    __param(2, (0, tsoa_1.Header)("X-Access-Token")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String]),
+    __metadata("design:returntype", Promise)
+], PublicationService.prototype, "removeParticipantFromPublication", null);
 PublicationService = __decorate([
     (0, tsoa_1.Route)("api/publication"),
     (0, tsoa_1.Tags)("Publications"),

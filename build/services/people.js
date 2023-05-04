@@ -82,7 +82,7 @@ let PeopleService = class PeopleService {
             }
         });
     }
-    createPeople(bodyData) {
+    createPeople(bodyData, _token = "") {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (!bodyData.name) {
@@ -97,7 +97,7 @@ let PeopleService = class PeopleService {
             }
         });
     }
-    updatePeople(name, bodyData) {
+    updatePeople(name, bodyData, _token = "") {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (!bodyData.name) {
@@ -112,7 +112,7 @@ let PeopleService = class PeopleService {
             }
         });
     }
-    deletePeople(name) {
+    deletePeople(name, _token = "") {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const people = yield PeopleModel.deletePeopleByName(name);
@@ -143,23 +143,26 @@ __decorate([
 __decorate([
     (0, tsoa_1.Post)("/"),
     __param(0, (0, tsoa_1.Body)()),
+    __param(1, (0, tsoa_1.Header)("X-Access-Token")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], PeopleService.prototype, "createPeople", null);
 __decorate([
     (0, tsoa_1.Patch)("/{name}"),
     __param(0, (0, tsoa_1.Path)()),
     __param(1, (0, tsoa_1.Body)()),
+    __param(2, (0, tsoa_1.Header)("X-Access-Token")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, Object, String]),
     __metadata("design:returntype", Promise)
 ], PeopleService.prototype, "updatePeople", null);
 __decorate([
     (0, tsoa_1.Delete)("/{name}"),
     __param(0, (0, tsoa_1.Path)()),
+    __param(1, (0, tsoa_1.Header)("X-Access-Token")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], PeopleService.prototype, "deletePeople", null);
 PeopleService = __decorate([

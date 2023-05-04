@@ -60,7 +60,7 @@ let JobService = class JobService {
             }
         });
     }
-    createJob(bodyData) {
+    createJob(bodyData, _token = "") {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (!bodyData.name) {
@@ -75,7 +75,7 @@ let JobService = class JobService {
             }
         });
     }
-    updateJob(jobName, bodyData) {
+    updateJob(jobName, bodyData, _token = "") {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const updatedJob = yield JobModel.updateJobByName(jobName, bodyData);
@@ -97,8 +97,9 @@ __decorate([
 __decorate([
     (0, tsoa_1.Post)("/"),
     __param(0, (0, tsoa_1.Body)()),
+    __param(1, (0, tsoa_1.Header)("X-Access-Token")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], JobService.prototype, "createJob", null);
 __decorate([
@@ -106,8 +107,9 @@ __decorate([
     (0, tsoa_1.Patch)("/{jobName}"),
     __param(0, (0, tsoa_1.Path)()),
     __param(1, (0, tsoa_1.Body)()),
+    __param(2, (0, tsoa_1.Header)("X-Access-Token")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, Object, String]),
     __metadata("design:returntype", Promise)
 ], JobService.prototype, "updateJob", null);
 JobService = __decorate([

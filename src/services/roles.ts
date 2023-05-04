@@ -1,4 +1,13 @@
-import { Get, Post, Route, Body, SuccessResponse, Response, Tags } from "tsoa";
+import {
+  Get,
+  Post,
+  Route,
+  Body,
+  SuccessResponse,
+  Response,
+  Tags,
+  Header,
+} from "tsoa";
 import { generateResponse, DefaultReponseBody } from "../helpers";
 import * as RoleModel from "../model/roles";
 
@@ -45,7 +54,8 @@ export default class RoleService {
 
   @Post("/")
   public async createRole(
-    @Body() bodyData: CreateRoleRequestBody
+    @Body() bodyData: CreateRoleRequestBody,
+    @Header("X-Access-Token") _token: string = ""
   ): Promise<CreateRoleResponseBody> {
     try {
       if (!bodyData.name) {

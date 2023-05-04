@@ -41,6 +41,14 @@ export default class PublicationController {
     return res.status(_.get(response, "status", 200)).json(response);
   }
 
+  public async assignParticipantToPublication(req: Request, res: Response) {
+    const response = await publicationService.assignParticipantToPublication(
+      req.params.title,
+      req.params.personId
+    );
+    return res.status(_.get(response, "status", 200)).json(response);
+  }
+
   public async updatePublication(req: Request, res: Response) {
     const response = await publicationService.updatePublication(
       req.params.title,
@@ -52,6 +60,14 @@ export default class PublicationController {
   public async deletePublication(req: Request, res: Response) {
     const response = await publicationService.deletePublication(
       req.params.title
+    );
+    return res.status(_.get(response, "status", 200)).json(response);
+  }
+
+  public async removeParticipantToPublication(req: Request, res: Response) {
+    const response = await publicationService.removeParticipantFromPublication(
+      req.params.title,
+      req.params.personId
     );
     return res.status(_.get(response, "status", 200)).json(response);
   }

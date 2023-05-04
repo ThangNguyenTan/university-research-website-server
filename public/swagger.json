@@ -734,7 +734,17 @@
 					"Roles"
 				],
 				"security": [],
-				"parameters": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": false,
+						"schema": {
+							"default": "",
+							"type": "string"
+						}
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -858,7 +868,17 @@
 					"Jobs"
 				],
 				"security": [],
-				"parameters": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": false,
+						"schema": {
+							"default": "",
+							"type": "string"
+						}
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -932,6 +952,15 @@
 						"name": "jobName",
 						"required": true,
 						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": false,
+						"schema": {
+							"default": "",
 							"type": "string"
 						}
 					}
@@ -1089,7 +1118,17 @@
 					"Publications"
 				],
 				"security": [],
-				"parameters": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": false,
+						"schema": {
+							"default": "",
+							"type": "string"
+						}
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -1230,6 +1269,15 @@
 						"schema": {
 							"type": "string"
 						}
+					},
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": false,
+						"schema": {
+							"default": "",
+							"type": "string"
+						}
 					}
 				],
 				"requestBody": {
@@ -1303,6 +1351,181 @@
 						"name": "title",
 						"required": true,
 						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": false,
+						"schema": {
+							"default": "",
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/publication/{title}/participants/{personId}": {
+			"patch": {
+				"operationId": "AssignParticipantToPublication",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreatePublicationResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Publications"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "title",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "personId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": false,
+						"schema": {
+							"default": "",
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "RemoveParticipantFromPublication",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreatePublicationResponseBody"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Invalid Input",
+											"status": 400
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DefaultReponseBody"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Internal Server Error",
+											"status": 500
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Publications"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "title",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "personId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": false,
+						"schema": {
+							"default": "",
 							"type": "string"
 						}
 					}
@@ -1441,7 +1664,17 @@
 					"Peoples"
 				],
 				"security": [],
-				"parameters": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": false,
+						"schema": {
+							"default": "",
+							"type": "string"
+						}
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -1582,6 +1815,15 @@
 						"schema": {
 							"type": "string"
 						}
+					},
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": false,
+						"schema": {
+							"default": "",
+							"type": "string"
+						}
 					}
 				],
 				"requestBody": {
@@ -1657,6 +1899,15 @@
 						"schema": {
 							"type": "string"
 						}
+					},
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": false,
+						"schema": {
+							"default": "",
+							"type": "string"
+						}
 					}
 				]
 			}
@@ -1729,7 +1980,17 @@
 					"Media"
 				],
 				"security": [],
-				"parameters": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "X-Access-Token",
+						"required": false,
+						"schema": {
+							"default": "",
+							"type": "string"
+						}
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {

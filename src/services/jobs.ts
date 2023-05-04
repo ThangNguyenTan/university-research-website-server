@@ -8,6 +8,7 @@ import {
   Response,
   Tags,
   Path,
+  Header,
 } from "tsoa";
 import { generateResponse, DefaultReponseBody } from "../helpers";
 import * as JobModel from "../model/jobs";
@@ -61,7 +62,8 @@ export default class JobService {
 
   @Post("/")
   public async createJob(
-    @Body() bodyData: CreateJobRequestBody
+    @Body() bodyData: CreateJobRequestBody,
+    @Header("X-Access-Token") _token: string = ""
   ): Promise<MutateJobResponseBody> {
     try {
       if (!bodyData.name) {
@@ -81,7 +83,8 @@ export default class JobService {
   @Patch("/{jobName}")
   public async updateJob(
     @Path() jobName: string,
-    @Body() bodyData: UpdateJobRequestBody
+    @Body() bodyData: UpdateJobRequestBody,
+    @Header("X-Access-Token") _token: string = ""
   ): Promise<MutateJobResponseBody> {
     try {
       const updatedJob = await JobModel.updateJobByName(jobName, bodyData);

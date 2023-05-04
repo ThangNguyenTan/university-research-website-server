@@ -8,20 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isOwner = exports.isAuthenticated = void 0;
-const lodash_1 = require("lodash");
+exports.isAuthenticated = void 0;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+require("dotenv/config");
 const isAuthenticated = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
-        const sessionToken = req.cookies["Authorization"];
-        if (!sessionToken) {
-            return res.sendStatus(401);
+        const token = (_a = req.header("X-Access-Token")) === null || _a === void 0 ? void 0 : _a.replace("Bearer ", "");
+        if (!token) {
+            throw new Error("Missing Token");
         }
-        const existingUser = true;
-        if (!existingUser) {
-            return res.sendStatus(403);
-        }
-        (0, lodash_1.merge)(req, { identity: existingUser });
+        const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+        req.token = decoded;
         return next();
     }
     catch (error) {
@@ -30,18 +32,3 @@ const isAuthenticated = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
     }
 });
 exports.isAuthenticated = isAuthenticated;
-const isOwner = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { id } = req.params;
-        const currentUserId = (0, lodash_1.get)(req, "identity._id", "");
-        if (!currentUserId || currentUserId.toString() != id) {
-            return res.sendStatus(403);
-        }
-        next();
-    }
-    catch (error) {
-        console.log(error);
-        res.sendStatus(400);
-    }
-});
-exports.isOwner = isOwner;

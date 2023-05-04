@@ -44,6 +44,12 @@ class PublicationController {
             return res.status(lodash_1.default.get(response, "status", 200)).json(response);
         });
     }
+    assignParticipantToPublication(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield publicationService.assignParticipantToPublication(req.params.title, req.params.personId);
+            return res.status(lodash_1.default.get(response, "status", 200)).json(response);
+        });
+    }
     updatePublication(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield publicationService.updatePublication(req.params.title, req.body);
@@ -53,6 +59,12 @@ class PublicationController {
     deletePublication(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield publicationService.deletePublication(req.params.title);
+            return res.status(lodash_1.default.get(response, "status", 200)).json(response);
+        });
+    }
+    removeParticipantToPublication(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield publicationService.removeParticipantFromPublication(req.params.title, req.params.personId);
             return res.status(lodash_1.default.get(response, "status", 200)).json(response);
         });
     }

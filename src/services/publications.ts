@@ -10,9 +10,12 @@ import {
   Delete,
   Patch,
   Query,
+  Header,
 } from "tsoa";
+import _ from "lodash";
 import { generateResponse, DefaultReponseBody } from "../helpers";
 import * as PublicationModel from "../model/publications";
+import * as PeopleModel from "../model/people";
 
 type CreatePublicationRequestBody = {
   title: string;
@@ -107,7 +110,8 @@ export default class PublicationService {
 
   @Post("/")
   public async createPublication(
-    @Body() bodyData: CreatePublicationRequestBody
+    @Body() bodyData: CreatePublicationRequestBody,
+    @Header("X-Access-Token") _token: string = ""
   ): Promise<CreatePublicationResponseBody> {
     try {
       if (!bodyData.title) {
@@ -123,10 +127,42 @@ export default class PublicationService {
     }
   }
 
+  @Patch("/{title}/participants/{personId}")
+  public async assignParticipantToPublication(
+    @Path() title: string,
+    @Path() personId: string,
+    @Header("X-Access-Token") _token: string = ""
+  ): Promise<CreatePublicationResponseBody> {
+    try {
+      let publication = await PublicationModel.getPublicationByName(title);
+      await PublicationModel.updatePublicationByTitle(title, {
+        participants: [..._.get(publication, "participants", []), personId],
+      });
+
+      const person = await PeopleModel.getPeopleById(personId);
+      await PeopleModel.updatePeopleById(personId, {
+        researchHighlights: [
+          ..._.get(person, "researchHighlights", []),
+          _.get(publication, "_id", null),
+        ],
+      });
+
+      publication = await PublicationModel.getPublicationByName(title);
+
+      return generateResponse(200, "Success", {
+        publication,
+      });
+    } catch (error) {
+      console.log(error);
+      return generateResponse();
+    }
+  }
+
   @Patch("/{title}")
   public async updatePublication(
     @Path() title: string,
-    @Body() bodyData: UpdatePublicationRequestBody
+    @Body() bodyData: UpdatePublicationRequestBody,
+    @Header("X-Access-Token") _token: string = ""
   ): Promise<CreatePublicationResponseBody> {
     try {
       if (!bodyData.title) {
@@ -147,7 +183,8 @@ export default class PublicationService {
 
   @Delete("/{title}")
   public async deletePublication(
-    @Path() title: string
+    @Path() title: string,
+    @Header("X-Access-Token") _token: string = ""
   ): Promise<CreatePublicationResponseBody> {
     try {
       const publication = await PublicationModel.deletePublicationByTitle(
@@ -155,6 +192,43 @@ export default class PublicationService {
       );
 
       return generateResponse(200, "Success", { publication });
+    } catch (error) {
+      console.log(error);
+      return generateResponse();
+    }
+  }
+
+  @Delete("/{title}/participants/{personId}")
+  public async removeParticipantFromPublication(
+    @Path() title: string,
+    @Path() personId: string,
+    @Header("X-Access-Token") _token: string = ""
+  ): Promise<CreatePublicationResponseBody> {
+    try {
+      let publication = await PublicationModel.getPublicationByName(title);
+      await PublicationModel.updatePublicationByTitle(title, {
+        participants: [
+          ..._.get(publication, "participants", []).filter(
+            (participant) => String(participant._id) != personId
+          ),
+        ],
+      });
+
+      const person = await PeopleModel.getPeopleById(personId);
+      await PeopleModel.updatePeopleById(personId, {
+        researchHighlights: [
+          ..._.get(person, "researchHighlights", []).filter(
+            (researchHighlight) =>
+              String(researchHighlight._id) != _.get(publication, "_id", "")
+          ),
+        ],
+      });
+
+      publication = await PublicationModel.getPublicationByName(title);
+
+      return generateResponse(200, "Success", {
+        publication,
+      });
     } catch (error) {
       console.log(error);
       return generateResponse();

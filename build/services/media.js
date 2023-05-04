@@ -24,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tsoa_1 = require("tsoa");
 const helpers_1 = require("../helpers");
 let RoleService = class RoleService {
-    uploadFile(file) {
+    uploadFile(file, _token = "") {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return (0, helpers_1.generateResponse)(200, "Success", { file });
@@ -39,8 +39,9 @@ let RoleService = class RoleService {
 __decorate([
     (0, tsoa_1.Post)("/upload"),
     __param(0, (0, tsoa_1.UploadedFile)()),
+    __param(1, (0, tsoa_1.Header)("X-Access-Token")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], RoleService.prototype, "uploadFile", null);
 RoleService = __decorate([

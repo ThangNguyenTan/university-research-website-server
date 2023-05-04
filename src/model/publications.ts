@@ -34,6 +34,15 @@ const PublicationSchema = new mongoose.Schema({
     type: String,
     default: "publication",
   },
+  participants: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "people",
+      },
+    ],
+    default: [],
+  },
   createdDate: {
     type: Date,
     default: Date.now,
@@ -65,13 +74,15 @@ export const getPublications = (
   PublicationModel.find(query)
     .limit(size)
     .skip((page - 1) * size)
+    .populate("participants")
     .sort({
       publish: "desc",
     });
 export const countTotalPublications = () => PublicationModel.count();
 export const getPublicationByName = (title: string) =>
-  PublicationModel.findOne({ title });
-export const getPublicationById = (id: string) => PublicationModel.findById(id);
+  PublicationModel.findOne({ title }).populate("participants");
+export const getPublicationById = (id: string) =>
+  PublicationModel.findById(id).populate("participants");
 export const createPublication = (values: Record<string, any>) =>
   new PublicationModel(values)
     .save()

@@ -32,6 +32,15 @@ const PeopleSchema = new mongoose.Schema({
     required: true,
     ref: "jobs",
   },
+  researchHighlights: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "publications",
+      },
+    ],
+    default: [],
+  },
 });
 
 export const PeopleModel = mongoose.model("people", PeopleSchema);
@@ -57,9 +66,15 @@ export const getAllPeoples = () =>
   PeopleModel.find().populate("role").populate("job");
 export const countTotalPeople = () => PeopleModel.count();
 export const getPeopleByName = (name: string) =>
-  PeopleModel.findOne({ name }).populate("role").populate("job");
+  PeopleModel.findOne({ name })
+    .populate("role")
+    .populate("job")
+    .populate("researchHighlights");
 export const getPeopleById = (id: string) =>
-  PeopleModel.findById(id).populate("role").populate("job");
+  PeopleModel.findById(id)
+    .populate("role")
+    .populate("job")
+    .populate("researchHighlights");
 export const createPeople = (values: Record<string, any>) =>
   new PeopleModel(values).save().then((people) => people.toObject());
 export const deletePeopleById = (id: string) =>
