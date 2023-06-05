@@ -23,8 +23,8 @@ The website is developed with the purpose of managing, showing and promoting som
 
 ### Development Purpose (with Docker & Docker Compose)
 
-- Download Docker (https://nodejs.org/en/)
+- Download Docker (https://www.docker.com/products/docker-desktop/)
 - Download Docker Compose (https://docs.docker.com/desktop/install/windows-install/)
-- Go to main folder and run `docker-compose -f .\docker-compose.dev.yml build server`
-- After the script is completed we can now start the container `docker-compose -f .\docker-compose.dev.yml up server`
+- Go to main folder and run `docker compose -f .\docker-compose.dev.yml build server`
+- After the script is completed we can now start the container `docker compose -f .\docker-compose.dev.yml up server`
 - The api will be available on port 8000
